@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Два пончика и чашка кофе — Специализированная кофейня</title>
+  <meta name="description" content="Современная специализированная кофейня со свежеобжаренным спешелти-кофе и теплыми ремесленными пончиками ручной работы.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-cream: #FAF5EE;
+      --bg-cream-card: #F4EDE2;
+      --bg-white: #FFFFFF;
+      --border-cream: #E8DCCE;
+      --text-coffee-950: #1A0F0A;
+      --text-coffee-900: #2C1810;
+      --text-coffee-800: #422518;
+      --text-coffee-600: #7E4A32;
+      --accent-caramel: #C9884D;
+      --accent-caramel-hover: #B87333;
+      --accent-caramel-light: #DDA46A;
+      --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --radius-md: 16px;
+      --radius-lg: 24px;
+      --shadow-sm: 0 2px 8px rgba(44, 24, 16, 0.06);
+      --shadow-md: 0 8px 24px rgba(44, 24, 16, 0.08);
+      --shadow-lg: 0 16px 36px rgba(44, 24, 16, 0.12);
+      --transition: all 0.28s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-cream);
+      color: var(--text-coffee-900);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font-family: inherit; }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+    /* ФИКСИРОВАННАЯ НАВИГАЦИЯ */
+    .header-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      transition: var(--transition);
+      background-color: rgba(250, 245, 238, 0.94);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(232, 220, 206, 0.8);
+      padding: 16px 0;
+    }
+    .header-nav.scrolled { padding: 12px 0; box-shadow: var(--shadow-sm); }
+    .nav-wrapper { display: flex; align-items: center; justify-content: space-between; }
+    .logo { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+    .logo-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--text-coffee-900); color: var(--accent-caramel);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: var(--transition);
+    }
+    .logo:hover .logo-icon { transform: rotate(8deg) scale(1.05); }
+    .logo-text { font-family: var(--font-serif); font-size: 1.25rem; color: var(--text-coffee-900); line-height: 1.1; }
+    .logo-sub { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-coffee-600); display: block; margin-top: 2px; }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-link { font-size: 0.94rem; font-weight: 500; color: var(--text-coffee-800); position: relative; padding: 4px 0; transition: var(--transition); }
+    .nav-link:hover { color: var(--accent-caramel); }
+    .nav-link::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background-color: var(--accent-caramel); transition: width 0.25s ease; }
+    .nav-link:hover::after { width: 100%; }
+    .nav-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 22px; background-color: var(--text-coffee-900);
+      color: var(--bg-cream); border-radius: 40px; font-size: 0.88rem;
+      font-weight: 600; border: none; cursor: pointer; transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .nav-btn:hover { background-color: var(--text-coffee-800); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .mobile-menu-btn { display: none; background: none; border: none; font-size: 24px; color: var(--text-coffee-900); cursor: pointer; }
+
+    /* ГЛАВНЫЙ РАЗДЕЛ (HERO) */
+    .hero-section {
+      padding: 160px 0 100px;
+      position: relative; overflow: hidden;
+      background: linear-gradient(180deg, var(--bg-cream) 0%, #F5ECE0 60%, var(--bg-cream) 100%);
+    }
+    .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; background-color: var(--bg-cream-card);
+      border: 1px solid var(--border-cream); border-radius: 30px;
+      font-size: 0.82rem; font-weight: 600; color: var(--text-coffee-600);
+      margin-bottom: 20px;
+    }
+    .badge-dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--accent-caramel); }
+    .hero-title { font-family: var(--font-serif); font-size: 3.3rem; line-height: 1.15; font-weight: 700; color: var(--text-coffee-900); margin-bottom: 24px; }
+    .hero-title span { color: var(--accent-caramel); font-style: italic; font-weight: 400; }
+    .hero-desc { font-size: 1.12rem; color: var(--text-coffee-600); margin-bottom: 36px; max-width: 540px; line-height: 1.7; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 48px; }
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 16px 36px; background-color: var(--text-coffee-900);
+      color: var(--bg-cream); font-size: 1rem; font-weight: 600;
+      border-radius: 40px; border: none; cursor: pointer; transition: var(--transition);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:hover { background-color: var(--text-coffee-800); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 15px 30px; background-color: var(--bg-white);
+      color: var(--text-coffee-900); font-size: 1rem; font-weight: 600;
+      border-radius: 40px; border: 1px solid var(--border-cream);
+      cursor: pointer; transition: var(--transition);
+    }
+    .btn-secondary:hover { background-color: var(--bg-cream-card); border-color: var(--accent-caramel); transform: translateY(-2px); }
+    .hero-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; padding-top: 24px; border-top: 1px solid var(--border-cream); }
+    .stat-number { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--text-coffee-900); }
+    .stat-label { font-size: 0.82rem; color: var(--text-coffee-600); margin-top: 2px; }
+    .hero-card { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); border: 4px solid var(--bg-white); position: relative; }
+    .hero-card img { width: 100%; height: 460px; object-fit: cover; transition: transform 0.6s ease; }
+    .hero-card:hover img { transform: scale(1.04); }
+    .hero-floating-badge {
+      position: absolute; bottom: 20px; left: 20px; right: 20px;
+      background: rgba(44, 24, 16, 0.85); backdrop-filter: blur(8px);
+      padding: 16px 20px; border-radius: var(--radius-md); color: var(--bg-cream);
+      display: flex; justify-content: space-between; align-items: center;
+      border: 1px solid rgba(250, 245, 238, 0.15);
+    }
+
+    /* РАЗДЕЛ «О КОМПАНИИ» */
+    .about-section { padding: 100px 0; background-color: var(--bg-cream); }
+    .section-header { text-align: center; max-width: 680px; margin: 0 auto 64px; }
+    .section-eyebrow { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-caramel); font-weight: 700; display: block; margin-bottom: 8px; }
+    .section-title { font-family: var(--font-serif); font-size: 2.5rem; color: var(--text-coffee-900); line-height: 1.25; font-weight: 700; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-bottom: 60px; }
+    .about-img-box { border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-md); border: 4px solid var(--bg-white); }
+    .about-img-box img { width: 100%; height: 420px; object-fit: cover; transition: transform 0.6s ease; }
+    .about-img-box:hover img { transform: scale(1.05); }
+    .about-content h3 { font-family: var(--font-serif); font-size: 1.8rem; color: var(--text-coffee-900); margin-bottom: 20px; line-height: 1.3; }
+    .about-content p { color: var(--text-coffee-600); font-size: 1rem; margin-bottom: 16px; line-height: 1.7; }
+    .about-features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .feat-card { background: var(--bg-cream-card); border: 1px solid var(--border-cream); border-radius: var(--radius-md); padding: 24px; transition: var(--transition); }
+    .feat-card:hover { background: var(--bg-white); transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .feat-icon { font-size: 28px; margin-bottom: 12px; display: inline-block; }
+    .feat-title { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 700; color: var(--text-coffee-900); margin-bottom: 8px; }
+    .feat-desc { font-size: 0.88rem; color: var(--text-coffee-600); line-height: 1.5; }
+
+    /* МЕНЮ (4 НАПИТКА) */
+    .menu-section { padding: 100px 0; background-color: var(--bg-cream-card); }
+    .menu-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .menu-card {
+      background: var(--bg-white); border-radius: var(--radius-lg);
+      border: 1px solid var(--border-cream); overflow: hidden;
+      display: flex; flex-direction: column; justify-content: space-between;
+      transition: var(--transition); box-shadow: var(--shadow-sm);
+    }
+    .menu-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); border-color: var(--accent-caramel-light); }
+    .menu-img-wrap { position: relative; height: 220px; overflow: hidden; background-color: var(--bg-cream); }
+    .menu-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .menu-card:hover .menu-img-wrap img { transform: scale(1.08); }
+    .badge-pop { position: absolute; top: 12px; left: 12px; background: var(--text-coffee-900); color: var(--bg-cream); font-size: 0.68rem; font-weight: 700; text-transform: uppercase; padding: 4px 10px; border-radius: 20px; }
+    .badge-vol { position: absolute; bottom: 12px; right: 12px; background: rgba(255, 255, 255, 0.9); color: var(--text-coffee-900); font-size: 0.75rem; font-weight: 600; padding: 3px 8px; border-radius: 6px; border: 1px solid var(--border-cream); }
+    .menu-info { padding: 20px; }
+    .menu-item-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 700; color: var(--text-coffee-900); margin-bottom: 8px; line-height: 1.3; }
+    .menu-item-desc { font-size: 0.84rem; color: var(--text-coffee-600); line-height: 1.5; margin-bottom: 16px; }
+    .taste-notes { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .note-pill { font-size: 0.72rem; padding: 3px 8px; background-color: var(--bg-cream); border: 1px solid var(--border-cream); color: var(--text-coffee-600); border-radius: 6px; }
+    .pairing-hint { background: var(--bg-cream); border: 1px dashed var(--border-cream); border-radius: 8px; padding: 8px 10px; font-size: 0.75rem; color: var(--text-coffee-600); }
+    .pairing-hint strong { color: var(--text-coffee-900); }
+    .menu-bottom { padding: 16px 20px; border-top: 1px solid var(--border-cream); display: flex; align-items: center; justify-content: space-between; background: var(--bg-white); }
+    .item-price { font-family: var(--font-serif); font-size: 1.3rem; font-weight: 700; color: var(--text-coffee-900); }
+    .btn-choose { padding: 8px 16px; background: var(--text-coffee-900); color: var(--bg-cream); border-radius: 30px; border: none; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: var(--transition); }
+    .btn-choose:hover { background: var(--accent-caramel); transform: translateY(-1px); }
+
+    /* КОНТАКТЫ И ЧАСЫ РАБОТЫ */
+    .contacts-section { padding: 100px 0; background-color: var(--bg-cream); }
+    .contacts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+    .contact-card { background: var(--bg-white); border-radius: var(--radius-lg); padding: 32px; border: 1px solid var(--border-cream); box-shadow: var(--shadow-sm); }
+    .contact-card-title { font-family: var(--font-serif); font-size: 1.5rem; font-weight: 700; color: var(--text-coffee-900); margin-bottom: 20px; }
+    .hours-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--bg-cream); border-radius: 10px; margin-bottom: 12px; font-size: 0.94rem; }
+    .hours-row span:first-child { font-weight: 600; color: var(--text-coffee-900); }
+    .hours-row span:last-child { font-weight: 700; color: var(--text-coffee-600); }
+    .info-item { display: flex; align-items: flex-start; gap: 12px; margin-top: 20px; }
+    .info-item-icon { font-size: 20px; color: var(--accent-caramel); line-height: 1; }
+    .info-item-text h4 { font-size: 0.82rem; color: var(--text-coffee-600); text-transform: uppercase; margin-bottom: 2px; }
+    .info-item-text p, .info-item-text a { font-size: 0.96rem; font-weight: 600; color: var(--text-coffee-900); }
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+    .form-group label { font-size: 0.82rem; font-weight: 700; color: var(--text-coffee-900); }
+    .form-group input, .form-group select, .form-group textarea {
+      padding: 12px 16px; border-radius: 10px; border: 1px solid var(--border-cream);
+      background-color: var(--bg-cream); font-size: 0.92rem; color: var(--text-coffee-900);
+      outline: none; transition: var(--transition);
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent-caramel); background-color: #FFF; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .btn-submit { padding: 15px; background: var(--text-coffee-900); color: var(--bg-cream); border-radius: 30px; font-weight: 700; font-size: 0.94rem; border: none; cursor: pointer; transition: var(--transition); margin-top: 8px; }
+    .btn-submit:hover { background: var(--text-coffee-800); transform: translateY(-2px); }
+
+    /* ПОДВАЛ */
+    .site-footer { background: var(--text-coffee-950); color: var(--bg-cream); padding: 60px 0 30px; border-top: 1px solid var(--text-coffee-800); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+    .footer-col h4 { font-family: var(--font-serif); font-size: 1.1rem; margin-bottom: 16px; color: var(--bg-cream); }
+    .footer-col p { font-size: 0.88rem; color: #D6C3AF; line-height: 1.6; }
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 8px; }
+    .footer-links a { font-size: 0.88rem; color: #D6C3AF; transition: var(--transition); }
+    .footer-links a:hover { color: var(--accent-caramel-light); }
+    .footer-bottom { padding-top: 24px; display: flex; justify-content: space-between; font-size: 0.8rem; color: #A08C78; }
+
+    /* АДАПТИВНОСТЬ */
+    @media (max-width: 992px) {
+      .hero-grid, .about-grid, .contacts-grid, .footer-grid { grid-template-columns: 1fr; }
+      .about-features, .menu-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-btn { display: none; }
+      .mobile-menu-btn { display: block; }
+      .nav-links.active {
+        display: flex; flex-direction: column; position: absolute;
+        top: 100%; left: 0; right: 0; background: var(--bg-cream);
+        padding: 24px; border-bottom: 1px solid var(--border-cream); gap: 16px;
+      }
+      .hero-title { font-size: 2.3rem; }
+      .about-features, .menu-grid, .form-row { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- НАВИГАЦИОННОЕ МЕНЮ (STICKY) -->
+  <header class="header-nav" id="headerNav">
+    <div class="container nav-wrapper">
+      <a href="#hero" class="logo">
+        <div class="logo-icon">☕</div>
+        <div>
+          <div class="logo-text">Два пончика</div>
+          <span class="logo-sub">и чашка кофе • Specialty</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#hero" class="nav-link">Главная</a></li>
+          <li><a href="#about" class="nav-link">О нас</a></li>
+          <li><a href="#menu" class="nav-link">Меню напитков</a></li>
+          <li><a href="#contacts" class="nav-link">Часы & Контакты</a></li>
+        </ul>
+      </nav>
+
+      <a href="#contacts" class="nav-btn">Забронировать столик</a>
+      <button class="mobile-menu-btn" id="mobileToggle" aria-label="Открыть меню">☰</button>
+    </div>
+  </header>
+
+  <!-- ГЛАВНЫЙ РАЗДЕЛ -->
+  <section class="hero-section" id="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span>Свежая обжарка и горячая выпечка каждые 30 мин</span>
+        </div>
+        <h1 class="hero-title">Два тёплых пончика. <span>Чашка кофе.</span> Ваш лучший утренний ритуал.</h1>
+        <p class="hero-desc">Мы объединили свежеобжаренную спешелти-арабику и пышные ремесленные пончики на тесте бриошь с 24-часовой ферментацией.</p>
+        <div class="hero-actions">
+          <a href="#menu" class="btn-primary">Попробовать меню</a>
+          <a href="#contacts" class="btn-secondary">Забронировать столик</a>
+        </div>
+        <div class="hero-stats">
+          <div><div class="stat-number">86+ Q</div><div class="stat-label">Specialty Арабика</div></div>
+          <div><div class="stat-number">30 мин</div><div class="stat-label">Горячая выпечка</div></div>
+          <div><div class="stat-number">4.9 ★</div><div class="stat-label">1200+ отзывов</div></div>
+        </div>
+      </div>
+
+      <div class="hero-image-wrapper">
+        <div class="hero-card">
+          <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=900&auto=format&fit=crop" alt="Кофе и пончики">
+          <div class="hero-floating-badge">
+            <div>
+              <p style="font-size: 0.72rem; text-transform: uppercase; color: var(--accent-caramel-light); font-weight: bold;">Утренний сет</p>
+              <p style="font-family: var(--font-serif); font-size: 1.05rem;">Фильтр Эфиопия + 2 пончика</p>
+            </div>
+            <span style="background: rgba(201, 136, 77, 0.4); border: 1px solid var(--accent-caramel); padding: 4px 10px; border-radius: 8px; font-weight: bold;">590 ₽</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- РАЗДЕЛ «О КОМПАНИИ» -->
+  <section class="about-section" id="about">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Наша история</span>
+        <h2 class="section-title">Как кофе обрёл свою идеальную половину</h2>
+      </div>
+
+      <div class="about-grid">
+        <div class="about-img-box">
+          <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?q=80&w=900&auto=format&fit=crop" alt="Обжарка кофе">
+        </div>
+
+        <div class="about-content">
+          <h3>«Мы устали от фабричных пончиков и поспешного кофе».</h3>
+          <p>Кофейня <strong>«Два пончика и чашка кофе»</strong> появилась в 2021 году благодаря союзу сертифицированного Q-грейдера и шеф-кондитера. Мы задались вопросом: почему пончик не может быть изысканным десертом с нежнейшей текстурой, а кофе — произведением вкуса?</p>
+          <p>Пара пончиков — это баланс: один ягодный с кислинкой, а второй сливочно-карамельный под согревающую чашку фильтра.</p>
+          <p>Мы готовим тесто бриошь исключительно на фермерском масле 82.5% с 24-часовой холодной опарой и завариваем кофе на легендарной итальянской машине La Marzocco.</p>
+        </div>
+      </div>
+
+      <div class="about-features">
+        <div class="feat-card">
+          <span class="feat-icon">☕</span>
+          <h4 class="feat-title">Specialty 86+</h4>
+          <p class="feat-desc">Прямой импорт свежего зерна от микроферм Эфиопии, Колумбии и Коста-Рики.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">✨</span>
+          <h4 class="feat-title">Бриошь на опаре</h4>
+          <p class="feat-desc">Никаких готовых смесей. Медленная ферментация 24 часа для воздушной структуры.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">⏱️</span>
+          <h4 class="feat-title">Свежесть 30 минут</h4>
+          <p class="feat-desc">Партии выпекаются непрерывно в течение дня, чтобы каждый пончик был ещё тёплым.</p>
+        </div>
+        <div class="feat-card">
+          <span class="feat-icon">🌿</span>
+          <h4 class="feat-title">Чистый состав</h4>
+          <p class="feat-desc">Собственные сиропы из лаванды, розмарина и ягод без искусственных ароматизаторов.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- РАЗДЕЛ МЕНЮ -->
+  <section class="menu-section" id="menu">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Авторская карта</span>
+        <h2 class="section-title">4 фирменных напитка от шеф-бариста</h2>
+      </div>
+
+      <div class="menu-grid">
+        <div class="menu-card">
+          <div>
+            <div class="menu-img-wrap">
+              <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?q=80&w=600&auto=format&fit=crop" alt="Лавандовый Раф Вельвет">
+              <span class="badge-pop">Хит</span>
+              <span class="badge-vol">350 мл</span>
+            </div>
+            <div class="menu-info">
+              <h3 class="menu-item-title">Лавандовый Раф Вельвет</h3>
+              <p class="menu-item-desc">Шелковистый сливочный кофе со взбитыми сливками, эссенцией лаванды и тростниковым сахаром.</p>
+              <div class="taste-notes">
+                <span class="note-pill">Горная лаванда</span>
+                <span class="note-pill">Сливочный пломбир</span>
+              </div>
+              <div class="pairing-hint"><strong>Пара: </strong>Фисташковый пончик с малиной</div>
+            </div>
+          </div>
+          <div class="menu-bottom"><span class="item-price">390 ₽</span><a href="#contacts" class="btn-choose">Выбрать</a></div>
+        </div>
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-img-wrap">
+              <img src="https://images.unsplash.com/photo-1541167760496-1628856ab772?q=80&w=600&auto=format&fit=crop" alt="Солёная Карамель Латте">
+              <span class="badge-pop">Хит</span>
+              <span class="badge-vol">380 мл</span>
+            </div>
+            <div class="menu-info">
+              <h3 class="menu-item-title">Солёная Карамель & Макадамия</h3>
+              <p class="menu-item-desc">Двойной шот арабики, карамель ручной варки с розовой солью и молоко с пастой макадамии.</p>
+              <div class="taste-notes">
+                <span class="note-pill">Сливочная ириска</span>
+                <span class="note-pill">Орех макадамия</span>
+              </div>
+              <div class="pairing-hint"><strong>Пара: </strong>Пончик Крем-брюле с корочкой</div>
+            </div>
+          </div>
+          <div class="menu-bottom"><span class="item-price">420 ₽</span><a href="#contacts" class="btn-choose">Выбрать</a></div>
+        </div>
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-img-wrap">
+              <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=600&auto=format&fit=crop" alt="Фильтр Эфиопия Иргачеффе">
+              <span class="badge-vol">300 мл</span>
+            </div>
+            <div class="menu-info">
+              <h3 class="menu-item-title">Фильтр Эфиопия Иргачеффе</h3>
+              <p class="menu-item-desc">Искристый чистый моносорт мытой обработки. Заваривается методом капельного пролива batch brew.</p>
+              <div class="taste-notes">
+                <span class="note-pill">Жасминовый чай</span>
+                <span class="note-pill">Белый персик</span>
+              </div>
+              <div class="pairing-hint"><strong>Пара: </strong>Глазированный с кардамоном</div>
+            </div>
+          </div>
+          <div class="menu-bottom"><span class="item-price">320 ₽</span><a href="#contacts" class="btn-choose">Выбрать</a></div>
+        </div>
+
+        <div class="menu-card">
+          <div>
+            <div class="menu-img-wrap">
+              <img src="https://images.unsplash.com/photo-1517701604599-bb29b565090c?q=80&w=600&auto=format&fit=crop" alt="Таёжный Кедровый Флэт Уайт">
+              <span class="badge-pop" style="background-color: var(--accent-caramel);">Новинка</span>
+              <span class="badge-vol">250 мл</span>
+            </div>
+            <div class="menu-info">
+              <h3 class="menu-item-title">Таёжный Кедровый Флэт Уайт</h3>
+              <p class="menu-item-desc">Плотный ристретто с шелковистой микропеной, сиропом из молодых шишек и кедровым грильяжем.</p>
+              <div class="taste-notes">
+                <span class="note-pill">Смолистый кедр</span>
+                <span class="note-pill">Темный какао</span>
+              </div>
+              <div class="pairing-hint"><strong>Пара: </strong>Шоколадный с морской солью</div>
+            </div>
+          </div>
+          <div class="menu-bottom"><span class="item-price">410 ₽</span><a href="#contacts" class="btn-choose">Выбрать</a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ И ЧАСЫ РАБОТЫ -->
+  <section class="contacts-section" id="contacts">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Ждём вас в гости</span>
+        <h2 class="section-title">Часы работы & Местоположение</h2>
+      </div>
+
+      <div class="contacts-grid">
+        <div class="contact-card">
+          <h3 class="contact-card-title">График работы кофейни</h3>
+          <div class="hours-row">
+            <span>Будние дни (Понедельник — Пятница)</span>
+            <span>07:30 – 21:30</span>
+          </div>
+          <div class="hours-row">
+            <span>Выходные дни (Суббота — Воскресенье)</span>
+            <span>08:30 – 22:30</span>
+          </div>
+
+          <div class="info-item">
+            <span class="info-item-icon">📍</span>
+            <div class="info-item-text">
+              <h4>Наш адрес</h4>
+              <p>г. Москва, ул. Покровка, д. 18/2 (метро Чистые пруды / Курская)</p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-item-icon">📞</span>
+            <div class="info-item-text">
+              <h4>Телефон</h4>
+              <p><a href="tel:+74958294412">+7 (495) 829-44-12</a></p>
+            </div>
+          </div>
+          <div class="info-item">
+            <span class="info-item-icon">✉️</span>
+            <div class="info-item-text">
+              <h4>Электронная почта</h4>
+              <p><a href="mailto:hello@twodonutsandcoffee.ru">hello@twodonutsandcoffee.ru</a></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-card">
+          <h3 class="contact-card-title">Забронировать столик</h3>
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Спасибо! Ваша бронь принята. Мы свяжемся с вами в течение 5 минут для подтверждения.'); this.reset();">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Ваше имя *</label>
+                <input type="text" id="name" required placeholder="Мария">
+              </div>
+              <div class="form-group">
+                <label for="phone">Телефон *</label>
+                <input type="tel" id="phone" required placeholder="+7 (999) 000-00-00">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="guests">Гости</label>
+                <select id="guests">
+                  <option>1 персона</option>
+                  <option selected>2 персоны</option>
+                  <option>3-4 персоны</option>
+                  <option>5+ персон</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="time">Время</label>
+                <input type="time" id="time" value="10:30">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="comment">Пожелания или предзаказ пончиков</label>
+              <textarea id="comment" rows="2" placeholder="Например: столик у окна и 2 фисташковых пончика..."></textarea>
+            </div>
+            <button type="submit" class="btn-submit">Подтвердить резерв столика</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ПОДВАЛ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="logo" style="margin-bottom: 16px;">
+            <div class="logo-icon" style="background: var(--accent-caramel); color: var(--text-coffee-950);">☕</div>
+            <div class="logo-text" style="color: var(--bg-cream);">Два пончика и чашка кофе</div>
+          </div>
+          <p>Специализированная кофейня на Покровке со свежей авторской выпечкой бриошь и зерном класса Specialty 86+.</p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Навигация</h4>
+          <ul class="footer-links">
+            <li><a href="#hero">Главная</a></li>
+            <li><a href="#about">О компании</a></li>
+            <li><a href="#menu">Фирменные напитки</a></li>
+            <li><a href="#contacts">Часы & Контакты</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Часы работы</h4>
+          <p>Пн — Пт: 07:30 – 21:30</p>
+          <p>Сб — Вс: 08:30 – 22:30</p>
+          <p style="margin-top: 8px; color: var(--accent-caramel);">ул. Покровка, 18/2 (Чистые пруды)</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 «Два пончика и чашка кофе». Все права защищены.</span>
+        <span>Теплый кофе и свежая выпечка каждый день.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const headerNav = document.getElementById('headerNav');
+    const mobileToggle = document.getElementById('mobileToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        headerNav.classList.add('scrolled');
+      } else {
+        headerNav.classList.remove('scrolled');
+      }
+    });
+
+    mobileToggle.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+      });
+    });
+  </script>
+</body>
+</html>
