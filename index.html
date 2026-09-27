@@ -46,6 +46,7 @@
     button, input, select, textarea { font-family: inherit; }
 
     .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    section[id] { scroll-margin-top: 92px; }
 
     /* ФИКСИРОВАННАЯ НАВИГАЦИЯ */
     .header-nav {
@@ -204,6 +205,54 @@
     .btn-submit { padding: 15px; background: var(--text-coffee-900); color: var(--bg-cream); border-radius: 30px; font-weight: 700; font-size: 0.94rem; border: none; cursor: pointer; transition: var(--transition); margin-top: 8px; }
     .btn-submit:hover { background: var(--text-coffee-800); transform: translateY(-2px); }
 
+    /* ВЛАДЕЛЬЦЫ СЕТИ И ФРАНШИЗА */
+    .owners-section {
+      padding: 100px 0;
+      background-color: var(--text-coffee-950);
+      background-image: radial-gradient(circle at 12% 18%, rgba(201, 136, 77, 0.18), transparent 55%), radial-gradient(circle at 88% 82%, rgba(201, 136, 77, 0.10), transparent 52%);
+      color: var(--bg-cream);
+    }
+    .owners-section .section-title { color: var(--bg-cream); }
+    .owners-lead { font-size: 1.02rem; color: #D6C3AF; margin-top: 16px; line-height: 1.7; }
+    .owners-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 64px; }
+    .owner-card { background: rgba(250, 245, 238, 0.05); border: 1px solid rgba(232, 220, 206, 0.16); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); }
+    .owner-card:hover { transform: translateY(-6px); border-color: var(--accent-caramel); box-shadow: var(--shadow-lg); background: rgba(250, 245, 238, 0.08); }
+    .owner-photo { position: relative; height: 380px; overflow: hidden; }
+    .owner-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; }
+    .owner-card:hover .owner-photo img { transform: scale(1.05); }
+    .owner-tag { position: absolute; top: 16px; left: 16px; background: var(--accent-caramel); color: var(--text-coffee-950); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 5px 12px; border-radius: 20px; }
+    .owner-body { padding: 26px; }
+    .owner-name { font-family: var(--font-serif); font-size: 1.6rem; font-weight: 700; color: var(--bg-cream); }
+    .owner-role { display: block; font-size: 0.76rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent-caramel-light); font-weight: 700; margin: 6px 0 14px; }
+    .owner-bio { font-size: 0.94rem; color: #D6C3AF; line-height: 1.7; margin-bottom: 16px; }
+    .owner-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .owner-list li { position: relative; padding-left: 24px; font-size: 0.88rem; color: #EADCC8; line-height: 1.5; }
+    .owner-list li::before { content: '\2615'; position: absolute; left: 0; top: 0; color: var(--accent-caramel); font-size: 0.8rem; }
+
+    .franchise-block { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; align-items: center; padding-top: 56px; border-top: 1px solid rgba(232, 220, 206, 0.16); }
+    .franchise-photo { position: relative; border-radius: var(--radius-lg); overflow: hidden; border: 4px solid rgba(250, 245, 238, 0.9); box-shadow: var(--shadow-lg); }
+    .franchise-photo img { width: 100%; height: 440px; object-fit: cover; transition: transform 0.6s ease; }
+    .franchise-photo:hover img { transform: scale(1.04); }
+    .franchise-photo-badge { position: absolute; bottom: 16px; left: 16px; right: 16px; background: rgba(26, 15, 10, 0.85); backdrop-filter: blur(8px); border: 1px solid rgba(201, 136, 77, 0.5); border-radius: var(--radius-md); padding: 12px 16px; color: var(--bg-cream); font-size: 0.86rem; line-height: 1.5; }
+    .franchise-title { font-family: var(--font-serif); font-size: 2rem; color: var(--bg-cream); line-height: 1.25; margin: 10px 0 16px; }
+    .franchise-text { color: #D6C3AF; font-size: 0.98rem; line-height: 1.7; margin-bottom: 24px; }
+    .benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+    .benefit { background: rgba(250, 245, 238, 0.05); border: 1px solid rgba(232, 220, 206, 0.16); border-radius: var(--radius-md); padding: 18px; transition: var(--transition); }
+    .benefit:hover { background: rgba(201, 136, 77, 0.14); border-color: var(--accent-caramel); transform: translateY(-3px); }
+    .benefit-icon { font-size: 22px; display: block; margin-bottom: 8px; }
+    .benefit h4 { font-family: var(--font-serif); font-size: 0.98rem; color: var(--bg-cream); margin-bottom: 6px; }
+    .benefit p { font-size: 0.82rem; color: #C9B49C; line-height: 1.5; }
+    .partner-cta { background: linear-gradient(135deg, rgba(201, 136, 77, 0.20), rgba(201, 136, 77, 0.06)); border: 1px solid rgba(201, 136, 77, 0.45); border-radius: var(--radius-lg); padding: 26px; }
+    .partner-cta h4 { font-family: var(--font-serif); font-size: 1.3rem; color: var(--bg-cream); margin-bottom: 8px; }
+    .partner-cta > p { font-size: 0.9rem; color: #E3D2BC; margin-bottom: 18px; line-height: 1.6; }
+    .partner-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .partner-form .full { grid-column: 1 / -1; }
+    .partner-form input, .partner-form select { padding: 12px 16px; border-radius: 10px; border: 1px solid rgba(232, 220, 206, 0.3); background: rgba(26, 15, 10, 0.6); color: var(--bg-cream); font-size: 0.92rem; outline: none; transition: var(--transition); }
+    .partner-form input::placeholder { color: #A08C78; }
+    .partner-form input:focus, .partner-form select:focus { border-color: var(--accent-caramel); background: rgba(26, 15, 10, 0.9); }
+    .btn-partner { grid-column: 1 / -1; padding: 15px; background: var(--accent-caramel); color: var(--text-coffee-950); border: none; border-radius: 30px; font-weight: 700; font-size: 0.95rem; cursor: pointer; transition: var(--transition); }
+    .btn-partner:hover { background: var(--accent-caramel-light); transform: translateY(-2px); }
+
     /* ПОДВАЛ */
     .site-footer { background: var(--text-coffee-950); color: var(--bg-cream); padding: 60px 0 30px; border-top: 1px solid var(--text-coffee-800); }
     .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
@@ -217,8 +266,9 @@
 
     /* АДАПТИВНОСТЬ */
     @media (max-width: 992px) {
-      .hero-grid, .about-grid, .contacts-grid, .footer-grid { grid-template-columns: 1fr; }
+      .hero-grid, .about-grid, .contacts-grid, .footer-grid, .owners-grid, .franchise-block { grid-template-columns: 1fr; }
       .about-features, .menu-grid { grid-template-columns: 1fr 1fr; }
+      .franchise-photo img { height: 360px; }
     }
     @media (max-width: 768px) {
       .nav-links, .nav-btn { display: none; }
@@ -229,7 +279,9 @@
         padding: 24px; border-bottom: 1px solid var(--border-cream); gap: 16px;
       }
       .hero-title { font-size: 2.3rem; }
-      .about-features, .menu-grid, .form-row { grid-template-columns: 1fr; }
+      .about-features, .menu-grid, .form-row, .benefits-grid, .partner-form { grid-template-columns: 1fr; }
+      .owners-section { padding: 70px 0; }
+      .owner-photo { height: 300px; }
       .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
     }
   </style>
@@ -252,6 +304,7 @@
           <li><a href="#hero" class="nav-link">Главная</a></li>
           <li><a href="#about" class="nav-link">О нас</a></li>
           <li><a href="#menu" class="nav-link">Меню напитков</a></li>
+          <li><a href="#owners" class="nav-link">Владельцы</a></li>
           <li><a href="#contacts" class="nav-link">Часы & Контакты</a></li>
         </ul>
       </nav>
@@ -434,6 +487,111 @@
     </div>
   </section>
 
+  <!-- ВЛАДЕЛЬЦЫ СЕТИ — ФРАНШИЗА -->
+  <section class="owners-section" id="owners">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-eyebrow">Лица сети</span>
+        <h2 class="section-title">Дмитрий и Артём — владельцы сети кофеен</h2>
+        <p class="owners-lead">«Кофейня у Дмитрия и Артема» выросла из одной точки на Покровке в сеть-франшизу. За каждой чашкой стоят два человека: один отвечает за зерно и стандарт обжарки, второй — за тесто, сервис и открытие новых городов.</p>
+      </div>
+
+      <div class="owners-grid">
+        <article class="owner-card">
+          <div class="owner-photo">
+            <img src="изображение_viber_1.jpg" alt="Дмитрий — сооснователь сети кофеен «Кофейня у Дмитрия и Артема»" loading="lazy">
+            <span class="owner-tag">Сооснователь №1</span>
+          </div>
+          <div class="owner-body">
+            <h3 class="owner-name">Дмитрий</h3>
+            <span class="owner-role">Кофе, зерно, обжарка</span>
+            <p class="owner-bio">Сертифицированный Q-грейдер: отвечает за закупку зерна напрямую с микроферм, профили обжарки и единый стандарт вкуса во всех точках сети. Именно его правило «ничего старше 14 дней после обжарки» делает кофе в наших кофейнях стабильным.</p>
+            <ul class="owner-list">
+              <li>9 лет в specialty-кофе, аттестация Q Grader (CQI)</li>
+              <li>Своя карта обжарки и техкарты на каждый напиток</li>
+              <li>Обучает бариста франчайзи-точек лично, онлайн и на площадке</li>
+              <li>Лично утверждает локацию перед открытием новой кофейни</li>
+            </ul>
+          </div>
+        </article>
+
+        <article class="owner-card">
+          <div class="owner-photo">
+            <img src="изображение_viber_2.jpg" alt="Артём — сооснователь сети кофеен «Кофейня у Дмитрия и Артема»" loading="lazy">
+            <span class="owner-tag">Сооснователь №2</span>
+          </div>
+          <div class="owner-body">
+            <h3 class="owner-name">Артём</h3>
+            <span class="owner-role">Кухня, сервис, развитие сети</span>
+            <p class="owner-bio">Шеф-кондитер и операционный партнёр: разработал линию бриошь-пончиков на 24-часовой опаре, собрал поставщиков и выстроил процессы, благодаря которым точка выходит на самоокупаемость без «ручного управления» владельцами.</p>
+            <ul class="owner-list">
+              <li>Автор рецептур выпечки и сезонных позиций меню</li>
+              <li>Построил логистику: полуфабрикаты и доставка по сети</li>
+              <li>Открыл и запустил действующие точки сети от и до</li>
+              <li>Финансовая модель, маркетинг и продвижение франшизы</li>
+            </ul>
+          </div>
+        </article>
+      </div>
+
+      <div class="franchise-block">
+        <div class="franchise-photo">
+          <img src="изображение_viber_3.jpg" alt="Кофейня сети «Кофейня у Дмитрия и Артема» — зал и бариста" loading="lazy">
+          <div class="franchise-photo-badge">
+            <strong>Франшиза «Кофейня у Дмитрия и Артема»</strong><br>
+            Запуск от 45 дней · обучение владельцев и команды включено
+          </div>
+        </div>
+
+        <div>
+          <span class="section-eyebrow">Сотрудничество</span>
+          <h3 class="franchise-title">Откройте кофейню в своём городе вместе с нами</h3>
+          <p class="franchise-text">Мы не продаём «коробку с логотипом». Дмитрий и Артём лично ведут каждый проект: от проверки локации и техкарт до первой смены ваших бариста. Вы получаете проверенные рецептуры, поставщиков зерна и выпечки, бренд-книгу и поддержку двух практиков, которые работают в сети каждый день.</p>
+
+          <div class="benefits-grid">
+            <div class="benefit">
+              <span class="benefit-icon">📊</span>
+              <h4>Понятная экономика</h4>
+              <p>Финансовая модель с реальными цифрами действующих точек, план выхода в плюс и контроль юнит-экономики.</p>
+            </div>
+            <div class="benefit">
+              <span class="benefit-icon">🎓</span>
+              <h4>Обучение под ключ</h4>
+              <p>Недели тренингов по кофе и выпечке для вас и команды, аттестация бариста, действующие чек-листы.</p>
+            </div>
+            <div class="benefit">
+              <span class="benefit-icon">🚚</span>
+              <h4>Поставки и логистика</h4>
+              <p>Единое зерно свежей обжарки, заготовки бриошь-пончиков, сиропы собственного производства.</p>
+            </div>
+            <div class="benefit">
+              <span class="benefit-icon">📣</span>
+              <h4>Маркетинг и бренд</h4>
+              <p>Брендбук, дизайн-тип точки, контент и рекламные кампании, которые уже работают в сети.</p>
+            </div>
+          </div>
+
+          <div class="partner-cta">
+            <h4>Приглашаем к сотрудничеству</h4>
+            <p>Ищем партнёров-франчайзи, арендодателей и поставщиков. Оставьте заявку — Дмитрий и Артём свяжутся с вами лично и пришлют презентацию франшизы с расчётом под ваш город.</p>
+            <form class="partner-form" onsubmit="event.preventDefault(); alert('Спасибо! Заявка на партнёрство отправлена. Дмитрий и Артём свяжутся с вами в течение рабочего дня.'); this.reset();">
+              <input type="text" placeholder="Ваше имя *" required>
+              <input type="tel" placeholder="Телефон *" required>
+              <input type="text" placeholder="Город *" required>
+              <select>
+                <option>Хочу открыть кофейню по франшизе</option>
+                <option>Готов сдать помещение под кофейню</option>
+                <option>Поставщик / поставка зерна или выпечки</option>
+                <option>Другой формат сотрудничества</option>
+              </select>
+              <button type="submit" class="btn-partner">Стать партнёром сети</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- КОНТАКТЫ И ЧАСЫ РАБОТЫ -->
   <section class="contacts-section" id="contacts">
     <div class="container">
@@ -534,6 +692,7 @@
             <li><a href="#hero">Главная</a></li>
             <li><a href="#about">О компании</a></li>
             <li><a href="#menu">Фирменные напитки</a></li>
+            <li><a href="#owners">Владельцы и франшиза</a></li>
             <li><a href="#contacts">Часы & Контакты</a></li>
           </ul>
         </div>
